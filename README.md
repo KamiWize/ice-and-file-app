@@ -26,8 +26,7 @@ This project is a take-home code challenge to create an application that helps t
 
 1. Clone the repository:
    ```bash
-   git clone <repository_url>
-   cd <project_directory>
+   git clone https://github.com/KamiWize/ice-and-file-app.git
    ```
 2. Install dependencies:
    ```bash
