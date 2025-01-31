@@ -3,7 +3,11 @@ import { getHouseById } from '@/lib/api';
 import { Container, Typography } from '@mui/material';
 import Grid from '@mui/material/Grid2';
 
-export default async function House({ params }: { params: { id: string } }) {
+type HouseProps = {
+  params: Promise<{ id: string }>;
+};
+
+export default async function House({ params }: HouseProps) {
   const { id } = await params;
   const houseId = Number(id) || 1;
   const swornListData = await getHouseById(houseId);

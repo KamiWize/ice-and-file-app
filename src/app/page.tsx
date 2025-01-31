@@ -4,11 +4,11 @@ import { getHouses } from '@/lib/api';
 import { Container, Typography } from '@mui/material';
 import Grid from '@mui/material/Grid2';
 
-export default async function Home({
-  searchParams,
-}: {
-  searchParams: { page: string };
-}) {
+type HomeProps = {
+  searchParams: Promise<{ page: string }>;
+};
+
+export default async function Home({ searchParams }: HomeProps) {
   const { page } = await searchParams;
   const currentPage = Number(page) || 1;
 
