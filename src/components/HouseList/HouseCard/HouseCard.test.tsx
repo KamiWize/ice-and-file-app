@@ -25,7 +25,7 @@ describe('<HouseCard />', () => {
     render(<HouseCard data={HOUSE_MOCK} />);
     expect(screen.getByText(/House Ball/i)).toBeInTheDocument();
     expect(
-      screen.getByText(/This house contains 1 sworn members/i)
+      screen.getByText(/This house is bound by the oaths of 1 loyal members/i)
     ).toBeInTheDocument();
     expect(screen.getByTestId('see-more-button')).toBeEnabled();
   });
