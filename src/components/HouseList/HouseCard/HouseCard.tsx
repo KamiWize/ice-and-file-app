@@ -36,7 +36,7 @@ export default function HouseCard(props: HouseCardProps) {
         <Typography variant="subtitle1" mb={2}>
           {hasSwornMembers
             ? 'This house has no sworn members'
-            : `This house is bound by the oaths of ${props.data.swornMembers.length} loyal members`}
+            : `This house has ${props.data.swornMembers.length} sworn members`}
         </Typography>
         <Grid container justifyContent="flex-end">
           <Button
