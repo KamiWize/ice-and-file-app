@@ -32,22 +32,14 @@ describe('<SwornMemberCard />', () => {
   });
 
   it('Renders the correct death status for the house and description', () => {
-    const mockData = { ...SWORN_MEMBER, died: 'yes' };
+    const mockData = { ...SWORN_MEMBER, died: 'In 211 AC, at Whitewalls' };
 
     render(<SwornMemberCard sworn={mockData} />);
 
     const memberStatus = screen.getByText(/Death/i);
+    const memberDeathData = screen.getByText(/In 211 AC, at Whitewalls/i);
 
     expect(memberStatus).toBeInTheDocument();
-  });
-
-  it('Renders multiple statuses when more than one is available', () => {
-    const mockData = { ...SWORN_MEMBER, titles: ['foo', 'bar'] };
-
-    render(<SwornMemberCard sworn={mockData} />);
-
-    const memberTitles = screen.getByText(/foo, bar/i);
-
-    expect(memberTitles).toBeInTheDocument();
+    expect(memberDeathData).toBeInTheDocument();
   });
 });

@@ -12,11 +12,12 @@ type HomeProps = {
 
 export default async function Home({ searchParams }: HomeProps) {
   const { page } = await searchParams;
-  const currentPage = Number(page);
 
   if (!isNumber(page)) {
     redirect('/?page=1');
   }
+
+  const currentPage = Number(page);
 
   const houseResponse = await getHouses(currentPage);
 

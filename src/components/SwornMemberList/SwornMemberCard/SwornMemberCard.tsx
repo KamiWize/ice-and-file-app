@@ -19,6 +19,7 @@ export default function SwornMemberCard(props: SwornMemberCardProps) {
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
+        justifyContent: 'center',
         minHeight: '11em',
         p: 2,
       }}
@@ -43,16 +44,16 @@ export default function SwornMemberCard(props: SwornMemberCardProps) {
             color={props.sworn.died ? 'secondary' : 'success'}
           />
         </Grid>
-        <Typography
-          variant="body2"
-          textAlign="center"
-          fontStyle="italic"
-          component="p"
-        >
-          {props.sworn.titles.length
-            ? props.sworn.titles.join(', ')
-            : 'No Titles'}
-        </Typography>
+        {props.sworn.died && (
+          <Typography
+            variant="body2"
+            textAlign="center"
+            fontStyle="italic"
+            component="p"
+          >
+            {props.sworn.died}
+          </Typography>
+        )}
       </CardContent>
     </Card>
   );
