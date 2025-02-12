@@ -4,3 +4,7 @@ export function getPageData(linkHeader: string) {
 
   return match ? Number(match[1]) : undefined;
 }
+
+export const isNumber = (v: unknown) =>
+  (typeof v === 'number' && v - v === 0) ||
+  (typeof v === 'string' && Number.isFinite(+v) && v.trim() !== '');

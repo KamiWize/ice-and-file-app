@@ -1,3 +1,6 @@
+'use server';
+
+import { redirect } from 'next/navigation';
 import { ICE_AND_FIRE_API_ENDPOINT } from './constants';
 import { House, HouseListResponse, HouseResponse, SwornMember } from '@/types';
 import { getPageData } from '@/utils';
@@ -10,7 +13,9 @@ export const getHouses = async (
     `${ICE_AND_FIRE_API_ENDPOINT}/houses?page=${page}&pageSize=${pageSize}`
   );
 
-  if (!response.ok) throw new Error('Failed to fetch houses');
+  if (!response.ok) {
+    redirect('/');
+  }
 
   // The Link header has the pagination information like last page, current page, etc.
   const linkHeader = response.headers.get('Link');
@@ -29,11 +34,13 @@ export const getHouseById = async (houseId: number): Promise<HouseResponse> => {
     `${ICE_AND_FIRE_API_ENDPOINT}/houses/${houseId}`
   );
 
-  if (!response.ok) throw new Error('Failed to fetch house data');
+  if (!response.ok) {
+    redirect('/');
+  }
 
   const houseResponse = (await response.json()) as House;
 
-  const swornList = await Promise.all(
+  const swornListResult = await Promise.allSettled(
     houseResponse.swornMembers.map(async (member) => {
       const response = await fetch(member);
 
@@ -44,6 +51,18 @@ export const getHouseById = async (houseId: number): Promise<HouseResponse> => {
       return swornMembersData;
     })
   );
+
+  const hasSwornErrorLoad = swornListResult.some(
+    (member) => member.status === 'rejected'
+  );
+
+  if (hasSwornErrorLoad) {
+    redirect('/');
+  }
+
+  const swornList = swornListResult
+    .filter((member) => member.status === 'fulfilled')
+    .map((member) => member.value);
 
   return {
     data: houseResponse,

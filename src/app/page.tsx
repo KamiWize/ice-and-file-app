@@ -1,6 +1,8 @@
+import { redirect } from 'next/navigation';
 import { HouseList } from '@/components/HouseList';
 import { PaginationController } from '@/components/PaginationController';
 import { getHouses } from '@/lib/api';
+import { isNumber } from '@/utils';
 import { Container, Typography } from '@mui/material';
 import Grid from '@mui/material/Grid2';
 
@@ -10,7 +12,11 @@ type HomeProps = {
 
 export default async function Home({ searchParams }: HomeProps) {
   const { page } = await searchParams;
-  const currentPage = Number(page) || 1;
+  const currentPage = Number(page);
+
+  if (!isNumber(page)) {
+    redirect('/?page=1');
+  }
 
   const houseResponse = await getHouses(currentPage);
 

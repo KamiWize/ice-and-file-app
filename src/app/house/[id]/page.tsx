@@ -1,7 +1,9 @@
 import SwornMemberList from '@/components/SwornMemberList/SwornMemberList';
 import { getHouseById } from '@/lib/api';
+import { isNumber } from '@/utils';
 import { Container, Typography } from '@mui/material';
 import Grid from '@mui/material/Grid2';
+import { redirect } from 'next/navigation';
 
 type HouseProps = {
   params: Promise<{ id: string }>;
@@ -9,7 +11,13 @@ type HouseProps = {
 
 export default async function House({ params }: HouseProps) {
   const { id } = await params;
-  const houseId = Number(id) || 1;
+
+  if (!isNumber(id)) {
+    redirect('/');
+  }
+
+  const houseId = Number(id);
+
   const swornListData = await getHouseById(houseId);
 
   return (
