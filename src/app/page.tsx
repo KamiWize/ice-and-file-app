@@ -15,14 +15,22 @@ export default async function Home({ searchParams }: HomeProps) {
   const houseResponse = await getHouses(currentPage);
 
   return (
-    <Container sx={{ mt: 4 }}>
-      <Typography variant="h4" gutterBottom>
+    <Container sx={{ mt: 4 }} component="main">
+      <Typography variant="h4" gutterBottom component="h1">
         Game of Thrones Houses
       </Typography>
-      <Grid container spacing={2} justifyContent="center">
+      <Grid container spacing={2} justifyContent="center" component="section">
         <HouseList data={houseResponse} currentPage={currentPage} />
       </Grid>
-      <PaginationController totalPages={houseResponse.totalPages} />
+      <Grid
+        container
+        mt={4}
+        spacing={4}
+        justifyContent="center"
+        component="section"
+      >
+        <PaginationController totalPages={houseResponse.totalPages} />
+      </Grid>
     </Container>
   );
 }

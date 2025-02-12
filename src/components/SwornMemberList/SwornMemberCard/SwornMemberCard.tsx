@@ -14,6 +14,7 @@ type SwornMemberCardProps = {
 export default function SwornMemberCard(props: SwornMemberCardProps) {
   return (
     <Card
+      component="article"
       sx={{
         display: 'flex',
         flexDirection: 'column',
@@ -23,7 +24,7 @@ export default function SwornMemberCard(props: SwornMemberCardProps) {
       }}
     >
       <CardContent>
-        <Typography variant="h6" textAlign="center">
+        <Typography variant="h6" textAlign="center" component="h2">
           {props.sworn.name || 'Unknown Sworn member'}
         </Typography>
         <Grid container justifyContent="center">
@@ -32,16 +33,22 @@ export default function SwornMemberCard(props: SwornMemberCardProps) {
             color="text.secondary"
             textAlign="center"
             mr={1}
+            component="span"
           >
             {props.sworn.gender} |
           </Typography>
           <Chip
             label={props.sworn.died ? 'Death' : 'Alive...yet'}
             size="small"
-            color={props.sworn.died ? 'error' : 'success'}
+            color={props.sworn.died ? 'secondary' : 'success'}
           />
         </Grid>
-        <Typography variant="body2" textAlign="center" fontStyle="italic">
+        <Typography
+          variant="body2"
+          textAlign="center"
+          fontStyle="italic"
+          component="p"
+        >
           {props.sworn.titles.length
             ? props.sworn.titles.join(', ')
             : 'No Titles'}

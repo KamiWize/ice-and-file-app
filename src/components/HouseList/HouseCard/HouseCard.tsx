@@ -28,18 +28,19 @@ export default function HouseCard(props: HouseCardProps) {
   }, [router, getHouseId]);
 
   return (
-    <Card sx={{ minHeight: 100 }}>
+    <Card sx={{ minHeight: 100 }} component="article">
       <CardContent>
-        <Typography variant="h6" mb={1}>
+        <Typography variant="h6" component="h2" mb={1}>
           {props.data.name || 'Unknown House'}
         </Typography>
-        <Typography variant="subtitle1" mb={2}>
+        <Typography variant="subtitle1" mb={2} component="p">
           {hasSwornMembers
             ? 'This house has no sworn members'
             : `This house has ${props.data.swornMembers.length} sworn members`}
         </Typography>
-        <Grid container justifyContent="flex-end">
+        <Grid container justifyContent="flex-end" component="div">
           <Button
+            type="button"
             data-testid="see-more-button"
             variant="outlined"
             startIcon={<SendIcon />}

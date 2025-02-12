@@ -11,6 +11,7 @@ const roboto = Roboto({
 
 export const metadata: Metadata = {
   title: 'Ice and Fire App',
+  description: 'Ice and Fire application for Soundcloud interview.',
 };
 
 export default function RootLayout({
