@@ -18,7 +18,7 @@ export default async function House({ params }: HouseProps) {
         Sworn member of {swornListData.data.name}
       </Typography>
       <Grid container spacing={2} justifyContent="center">
-        <SwornMemberList initialData={swornListData} houseId={houseId} />
+        <SwornMemberList data={swornListData} houseId={houseId} />
       </Grid>
     </Container>
   );

@@ -16,26 +16,38 @@ jest.mock('next/navigation', () => ({
 }));
 
 describe('<HouseCard />', () => {
-  it('should have no obvious a11y violations', async () => {
+  it('Should have no obvious a11y violations', async () => {
     const { container } = render(<HouseCard data={HOUSE_MOCK} />);
     expect(await axe(container)).toHaveNoViolations();
   });
 
-  it('should render the house data with sworn members', () => {
+  it('Renders house name, sworn members, and enables "See More" button', () => {
     render(<HouseCard data={HOUSE_MOCK} />);
-    expect(screen.getByText(/House Ball/i)).toBeInTheDocument();
-    expect(
-      screen.getByText(/This house is bound by the oaths of 1 loyal members/i)
-    ).toBeInTheDocument();
-    expect(screen.getByTestId('see-more-button')).toBeEnabled();
+
+    const houseName = screen.getByText(/House Ball/i);
+    const houseDescription = screen.getByText(
+      /This house has 1 sworn members/i
+    );
+    const seeMoreBtn = screen.getByTestId('see-more-button');
+
+    expect(houseName).toBeInTheDocument();
+    expect(houseDescription).toBeInTheDocument();
+    expect(seeMoreBtn).toBeEnabled();
   });
 
-  it('should render the house data without sworn members', () => {
-    render(<HouseCard data={{ ...HOUSE_MOCK, swornMembers: [] }} />);
-    expect(screen.getByText(/House Ball/i)).toBeInTheDocument();
-    expect(
-      screen.getByText(/This house has no sworn members/i)
-    ).toBeInTheDocument();
-    expect(screen.getByTestId('see-more-button')).toBeDisabled();
+  it('Renders the house data without displaying sworn members', () => {
+    const mockData = { ...HOUSE_MOCK, swornMembers: [] };
+
+    render(<HouseCard data={mockData} />);
+
+    const houseName = screen.getByText(/House Ball/i);
+    const houseDescription = screen.getByText(
+      /This house has no sworn members/i
+    );
+    const seeMoreBtn = screen.getByTestId('see-more-button');
+
+    expect(houseName).toBeInTheDocument();
+    expect(houseDescription).toBeInTheDocument();
+    expect(seeMoreBtn).toBeDisabled();
   });
 });

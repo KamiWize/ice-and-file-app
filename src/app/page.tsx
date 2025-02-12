@@ -20,7 +20,7 @@ export default async function Home({ searchParams }: HomeProps) {
         Game of Thrones Houses
       </Typography>
       <Grid container spacing={2} justifyContent="center">
-        <HouseList initialData={houseResponse} currentPage={currentPage} />
+        <HouseList data={houseResponse} currentPage={currentPage} />
       </Grid>
       <PaginationController totalPages={houseResponse.totalPages} />
     </Container>

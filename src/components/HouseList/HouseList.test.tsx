@@ -1,7 +1,5 @@
-import { render, waitFor } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import { axe } from 'jest-axe';
-import { QueryClientProvider } from '@tanstack/react-query';
-import { queryClient } from '../../../jest.setup';
 import { HOUSE_MOCK } from '@/test/mocks/house';
 import HouseList from './HouseList';
 
@@ -19,17 +17,10 @@ jest.mock('next/navigation', () => ({
 
 describe('<HouseList />', () => {
   it('should have no obvious a11y violations', async () => {
-    const { container } = render(
-      <QueryClientProvider client={queryClient}>
-        <HouseList
-          currentPage={1}
-          initialData={{ houseData: [HOUSE_MOCK], totalPages: 0 }}
-        />
-      </QueryClientProvider>
-    );
+    const mockData = { houseData: [HOUSE_MOCK], totalPages: 0 };
 
-    await waitFor(async () => {
-      expect(await axe(container)).toHaveNoViolations();
-    });
+    const { container } = render(<HouseList currentPage={1} data={mockData} />);
+
+    expect(await axe(container)).toHaveNoViolations();
   });
 });
