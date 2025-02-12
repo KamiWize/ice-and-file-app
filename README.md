@@ -17,7 +17,6 @@ This project is a take-home code challenge to create an application that helps t
 
 - **Framework**: Next.js v15
 - **Styling**: Mui v6
-- **Data Fetching**: React Query and fetch API
 - **State Management**: None
 - **Type Checking**: TypeScript
 - **Test suite**: Jest and Jest-Axe
